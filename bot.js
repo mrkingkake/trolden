@@ -20,7 +20,7 @@ fs.readdir("./cmds/", (err, files) => {
 
     jsfile.forEach((f, i) => {
         let props = require(`./cmds/${f}`);
-        console.log(`${i + 1}; ${f} loaded!`);
+        console.log(`${i + 1}: ${f} loaded!`);
         bot.commands.set(props.help.name, props);
     });
 });
@@ -28,7 +28,6 @@ fs.readdir("./cmds/", (err, files) => {
 bot.on("ready", async () => {
 
     console.log(`Ready! ${bot.user.username}`);
-
 });
 
 bot.on("message", async message => {
@@ -40,7 +39,7 @@ bot.on("message", async message => {
     let args = messageArray.slice(1);
 
     if(!command.startsWith(prefix)) return;
-
+    
     let cmd = bot.commands.get(command.slice(prefix.length));
     if(cmd) cmd.run(bot, message, args);
 
