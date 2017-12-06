@@ -8,12 +8,12 @@ module.exports.run = async (bot, message, args) => {
            "`!help`: trolden vil sende dig en hjælpelist",
            "",
            "`!none` Vi kan intet trlolo",
-           "`!none` Vi kan intet overhovedet."        
+           "`!none` Vi kan intet overhovedet.1"        
        ]);
 }
 
 module.exports.help = {
     name: "help",
-    info: "hello",
-    role: ["Admin"]
+    info: "Get Help",
+    role: "Players"
 }

@@ -42,20 +42,26 @@ bot.on("message", async message => {
     if(!command.startsWith(prefix)) return;
     
     let cmd = bot.commands.get(command.slice(prefix.length));
+    let roles = cmd.help.role;
+
     if(cmd)  {
-        if(hasRoles(message.member, `${cmd.help.role}`)){
+        // make indexOf
+        console.log(roles);
+        if(hasRoles(message.member, `${roles}`)){
             cmd.run(bot, message, args);
-            return true;
+        }else{
+            message.channel.send("Det har du ikke tilladelse til!");
         }
     }
 
 });
+
 function pluck(array) 
 {
     return array.map(function(item) 
     { 
         return item["name"]; 
-    });
+    }); 
 }
 function hasRoles(mem, role) {
     if(pluck(mem.roles).includes(role)) {
@@ -63,6 +69,7 @@ function hasRoles(mem, role) {
     }else{
         return false;
     }
+    
 }
 
 bot.login(botConfig.token);
