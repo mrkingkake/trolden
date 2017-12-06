@@ -28,6 +28,7 @@ fs.readdir("./cmds/", (err, files) => {
 bot.on("ready", async () => {
 
     console.log(`Ready! ${bot.user.username}`);
+
 });
 
 bot.on("message", async message => {
@@ -41,8 +42,27 @@ bot.on("message", async message => {
     if(!command.startsWith(prefix)) return;
     
     let cmd = bot.commands.get(command.slice(prefix.length));
-    if(cmd) cmd.run(bot, message, args);
+    if(cmd)  {
+        if(hasRoles(message.member, `${cmd.help.role}`)){
+            cmd.run(bot, message, args);
+            return true;
+        }
+    }
 
 });
+function pluck(array) 
+{
+    return array.map(function(item) 
+    { 
+        return item["name"]; 
+    });
+}
+function hasRoles(mem, role) {
+    if(pluck(mem.roles).includes(role)) {
+        return true;
+    }else{
+        return false;
+    }
+}
 
 bot.login(botConfig.token);
