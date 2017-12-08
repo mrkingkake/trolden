@@ -45,31 +45,15 @@ bot.on("message", async message => {
     let roles = cmd.help.role;
 
     if(cmd)  {
-        // make indexOf
-        console.log(roles);
-        if(hasRoles(message.member, `${roles}`)){
+        if(message.member.roles.some(r => roles.includes(r.name)))
+        {
             cmd.run(bot, message, args);
         }else{
             message.channel.send("Det har du ikke tilladelse til!");
-        }
+        }  
     }
-
 });
 
-function pluck(array) 
-{
-    return array.map(function(item) 
-    { 
-        return item["name"]; 
-    }); 
-}
-function hasRoles(mem, role) {
-    if(pluck(mem.roles).includes(role)) {
-        return true;
-    }else{
-        return false;
-    }
-    
-}
+
 
 bot.login(botConfig.token);

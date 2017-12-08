@@ -13,5 +13,5 @@ module.exports.run = async (bot, message, args) => {
 module.exports.help = {
     name: "userinfo",
     info: "Get User Info",
-    role: "Admin"
+    role: ["Admin", "Mod"]
 }
