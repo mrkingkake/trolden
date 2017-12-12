@@ -15,6 +15,8 @@ module.exports.run = async (bot, message, args) => {
         files.forEach((f) => {
             let props = require(`./${f}`);
             let list = bot.commands.get(props.help.name, props.help.info, props);
+
+            // Make if function to not display admin command
        
             msgsArray.push(`!${list.help.name}: ${list.help.info}`+ "\n");
 
