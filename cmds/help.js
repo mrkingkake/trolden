@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = module.require("fs");
 
 module.exports.run = async (bot, message, args) => {
 

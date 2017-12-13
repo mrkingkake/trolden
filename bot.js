@@ -7,6 +7,7 @@ const bot = new Discord.Client({disableEveryone: true});
 
 bot.commands = new Discord.Collection();
 
+
 fs.readdir("./cmds/", (err, files) => {
     if(err) console.error(err);
     
@@ -34,6 +35,12 @@ bot.on("ready", async () => {
 bot.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
+    const bannedWords = ["cunt", "bøsse", "fuck", "nigga", "røv", "nigger"];
+    
+    if(bannedWords.some(bw => message.content.includes(bw)) ) {
+        message.delete();
+        message.reply("Du gjorde trolden ked af det ved at sige et slemt ord!!");
+    }
 
     let messageArray = message.content.split(/\s+/g);
     let command = messageArray[0];
@@ -43,6 +50,8 @@ bot.on("message", async message => {
     
     let cmd = bot.commands.get(command.slice(prefix.length));
     let roles = cmd.help.role;
+
+   
 
     if(cmd)  {
         if(message.member.roles.some(r => roles.includes(r.name)))
