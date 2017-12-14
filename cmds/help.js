@@ -1,4 +1,5 @@
 const fs = module.require("fs");
+const Discord = module.require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
@@ -14,11 +15,14 @@ module.exports.run = async (bot, message, args) => {
 
         files.forEach((f) => {
             let props = require(`./${f}`);
-            let list = bot.commands.get(props.help.name, props.help.info, props);
-
-            // Make if function to not display admin command
-       
-            msgsArray.push(`!${list.help.name}: ${list.help.info}`+ "\n");
+            let list = bot.commands.get(props.help.name, props.help.info, props.help.role, props);
+            let roles = list.help.role;
+    
+            if(message.member.roles.some(r => roles.includes(r.name))){
+                msgsArray.push(`!${list.help.name}: ${list.help.info}`+ "\n");
+            }
+          
+            // 
 
         });
         message.author.send( 
