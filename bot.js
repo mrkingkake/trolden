@@ -1,9 +1,12 @@
 const botConfig = require("./config.json");
 const Discord = require("discord.js");
 const fs = require("fs");
+const mysql = require("mysql");
+const mysqlcon = require("./lib/mysql/mysql.js");
 
 const prefix = botConfig.prefix;
 const bot = new Discord.Client({disableEveryone: true});
+const talkedRecently = new Set();
 
 bot.commands = new Discord.Collection();
 
@@ -26,6 +29,9 @@ fs.readdir("./cmds/", (err, files) => {
     });
 });
 
+mysqlcon.getCon();
+
+
 bot.on("ready", async () => {
 
     console.log(`Ready! ${bot.user.username}`);
@@ -35,12 +41,17 @@ bot.on("ready", async () => {
 bot.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
-    const bannedWords = ["cunt", "bøsse", "fuck", "nigga", "røv", "nigger"];
+    const bannedWords = ["cunt", "bøsse", "fuck", "nigga", "nigger"];
     
     if(bannedWords.some(bw => message.content.includes(bw)) ) {
         message.delete();
         message.reply("Du gjorde trolden ked af det ved at sige et slemt ord!!");
     }
+
+    talkedRecently.add(message.author.id);
+    setTimeout(() => {
+        talkedRecently.delete(message.author.id);
+    }, 2500);
 
     let messageArray = message.content.split(/\s+/g);
     let command = messageArray[0];

@@ -4,7 +4,8 @@
   "description": "T-lan Bot for Discord",
   "main": "bot.js",
   "dependencies": {
-    "discord.js": "^11.2.1"
+    "discord.js": "^11.2.1",
+    "mysql": "^2.15.0"
   },
   "devDependencies": {},
   "scripts": {

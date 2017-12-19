@@ -21,8 +21,7 @@ module.exports.run = async (bot, message, args) => {
             if(message.member.roles.some(r => roles.includes(r.name))){
                 msgsArray.push(`!${list.help.name}: ${list.help.info}`+ "\n");
             }
-          
-            // 
+
 
         });
         message.author.send( 
@@ -39,5 +38,5 @@ module.exports.run = async (bot, message, args) => {
 module.exports.help = {
     name: "help",
     info: "Display a list of Commands",
-    role: "Players"
+    role: ["Players"]
 }
