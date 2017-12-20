@@ -16,9 +16,14 @@ module.exports.run = async (bot, message, args) => {
     });
     
 }
+module.exports.conf = {
+    role: ["Admin", "Mod"],
+    enabled: true,
+    aliases: ["erase"]
+}
 
 module.exports.help = {
     name: "purge",
     info: "To remove a load of words",
-    role: ["Admin", "Mod"]
+    usage: "!purge [x]"
 }

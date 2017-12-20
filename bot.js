@@ -60,7 +60,7 @@ bot.on("message", async message => {
     if(!command.startsWith(prefix)) return;
     
     let cmd = bot.commands.get(command.slice(prefix.length));
-    let roles = cmd.help.role;
+    let roles = cmd.conf.role;
 
    
 

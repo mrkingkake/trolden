@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
         files.forEach((f) => {
             let props = require(`./${f}`);
             let list = bot.commands.get(props.help.name, props.help.info, props.help.role, props);
-            let roles = list.help.role;
+            let roles = list.conf.role;
     
             if(message.member.roles.some(r => roles.includes(r.name))){
                 msgsArray.push(`!${list.help.name}: ${list.help.info}`+ "\n");
@@ -34,9 +34,15 @@ module.exports.run = async (bot, message, args) => {
            ]);  
     });  
 }
+module.exports.conf = {
+    role: ["Players"],
+    enabled: true,
+    aliases: ["h"]
+}
 
 module.exports.help = {
     name: "help",
     info: "Display a list of Commands",
-    role: ["Players"]
+    usage: "!help"
+    
 }
