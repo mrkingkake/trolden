@@ -4,7 +4,7 @@ const fs = require("fs");
 const mysql = require("mysql");
 const mysqlcon = require("./lib/mysql/mysql.js");
 
-const prefix = botConfig.prefix;
+var prefix = botConfig.prefix;
 const bot = new Discord.Client({disableEveryone: true});
 const talkedRecently = new Set();
 
@@ -44,6 +44,7 @@ bot.on("message", async message => {
     const bannedWords = ["cunt", "bøsse", "fuck", "nigga", "nigger"];
     
     if(bannedWords.some(bw => message.content.includes(bw)) ) {
+        // not good enough, need to check words only.
         message.delete();
         message.reply("Du gjorde trolden ked af det ved at sige et slemt ord!!");
     }
