@@ -1,4 +1,10 @@
 {
     "token": "",
-    "prefix": "!"
+    "prefix": "!",
+    "db": {
+        "host": "127.0.0.1",
+        "user": "root",
+        "password": ""
+    },
+    "api": "https://jsonplaceholder.typicode.com/posts"
 }

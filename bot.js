@@ -6,7 +6,6 @@ const mysqlcon = require("./lib/mysql/mysql.js");
 
 var prefix = botConfig.prefix;
 const bot = new Discord.Client({disableEveryone: true});
-const talkedRecently = new Set();
 
 bot.commands = new Discord.Collection();
 
@@ -31,7 +30,6 @@ fs.readdir("./cmds/", (err, files) => {
 
 mysqlcon.getCon();
 
-
 bot.on("ready", async () => {
 
     console.log(`Ready! ${bot.user.username}`);
@@ -49,11 +47,6 @@ bot.on("message", async message => {
         message.reply("Du gjorde trolden ked af det ved at sige et slemt ord!!");
     }
 
-    talkedRecently.add(message.author.id);
-    setTimeout(() => {
-        talkedRecently.delete(message.author.id);
-    }, 2500);
-
     let messageArray = message.content.split(/\s+/g);
     let command = messageArray[0];
     let args = messageArray.slice(1);
@@ -62,8 +55,6 @@ bot.on("message", async message => {
     
     let cmd = bot.commands.get(command.slice(prefix.length));
     let roles = cmd.conf.role;
-
-   
 
     if(cmd)  {
         if(message.member.roles.some(r => roles.includes(r.name)))
