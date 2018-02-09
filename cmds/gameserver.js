@@ -1,13 +1,24 @@
 const Discord = module.require("discord.js");
 const mysqlcon = require("./../lib/mysql/mysql.js");
 
+
 module.exports.run = async (bot, message, args) => {
     let myRole = message.member.roles.some(r=>["Admin", "Mod"].includes(r.name));
 
     if (args[0] == 'show') {
-        mysqlcon.gameserverShow();
-     
-       
+        mysqlcon.gameserverShow((err, rows, fields) => {
+           
+            let result = [];
+            
+
+            for (let i = 0; i < rows.length; i++) {
+                result.push("Servername " + rows[i]['name'], "GAME: " + rows[i]['game'], "IP: " + rows[i]['ip'] + '\t\n');
+                
+            }
+            
+            message.channel.send(result);
+        });
+        
     }
 
     if (args[0] == 'add' && args.length === 4  && myRole != false) {
