@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
 
             for (let i = 0; i < rows.length; i++) {
                 result.push("Servername " + rows[i]['name'], "GAME: " + rows[i]['game'], "IP: " + rows[i]['ip'] + '\t\n');
-                
+                // make index
             }
             
             message.channel.send(result);
