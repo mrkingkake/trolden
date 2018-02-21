@@ -45,6 +45,6 @@ module.exports.conf = {
 
 module.exports.help = {
     name: "gameserver",
-    info: "retrieve info of who has responsibility of what",
-    usage: "!gameserver show, !gameserver add"
+    info: "Dislpay a list of servers",
+    usage: "!gameserver show. For Mods: !gameserver add name game ip , !gameserver delete name"
 }

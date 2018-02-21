@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
             let roles = list.conf.role;
     
             if(message.member.roles.some(r => roles.includes(r.name))){
-                msgsArray.push(`!${list.help.name}: ${list.help.info}`+ "\n");
+                msgsArray.push(`!${list.help.name}: ${list.help.info} - usage: ${list.help.usage}`+ "\n");
             }
 
 
