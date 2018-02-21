@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.conf = {
-    role: ["Admin", "Mod","Team Captain", "Players"],
+    role: ["Admin", "Mod"],
     enabled: true,
     aliases: []
 }
