@@ -35,7 +35,7 @@ module.exports.run = async (bot, message, args) => {
     });  
 }
 module.exports.conf = {
-    role: ["Players"],
+    role: ["Players", "Mod", "Admin"],
     enabled: true,
     aliases: ["h"]
 }

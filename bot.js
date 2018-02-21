@@ -66,6 +66,29 @@ bot.on("message", async message => {
     }
 });
 
+function emitWarning(uid, reason) { 
+    const warning = new Error( 
+      `Unhandled promise rejection (rejection id: ${uid}): ` + 
+      safeToString(reason)); 
+    warning.name = 'UnhandledPromiseRejectionWarning'; 
+    warning.id = uid; 
+    try { 
+      if (reason instanceof Error) { 
+        warning.stack = reason.stack; 
+      } 
+    } catch (err) { 
+      // ignored 
+    } 
+    process.emitWarning(warning); 
+    if (!deprecationWarned) { 
+      deprecationWarned = true; 
+      process.emitWarning( 
+        'Unhandled promise rejections are deprecated. In the future, ' + 
+        'promise rejections that are not handled will terminate the ' + 
+        'Node.js process with a non-zero exit code.', 
+        'DeprecationWarning', 'DEP0018'); 
+    } 
+ } 
 
 
 bot.login(botConfig.token);
