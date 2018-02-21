@@ -33,7 +33,7 @@ mysqlcon.getCon();
 bot.on("ready", async () => {
 
     console.log(`Ready! ${bot.user.username}`);
-
+    
 });
 
 bot.on("message", async message => {
@@ -64,6 +64,9 @@ bot.on("message", async message => {
             message.channel.send("Det har du ikke tilladelse til!");
         }  
     }
+    const guildMember = message.member;
+    guildMember.addRole('Player');
+    console.log(`${guildMember} is added to Player role`);
 });
 
 bot.login(botConfig.token);
